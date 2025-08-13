@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ICU24 Calibrated Baselines</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 1.5rem auto; max-width: 980px; padding: 0 1rem; color: #111; }
+    header h1 { margin: 0 0 .25rem; }
+    header p { margin: 0 0 1rem; color: #444; }
+    code, pre { background: #f6f8fa; border-radius: 6px; padding: .2rem .4rem; }
+    pre { padding: .75rem; overflow: auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    figure { margin: 0; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; background: #fff; }
+    figure img { display: block; width: 100%; height: auto; }
+    figure figcaption { font-size: .9rem; padding: .5rem .75rem; color: #333; background: #fafafa; border-top: 1px solid #eee; }
+    .note { background: #fff7ed; border: 1px solid #fed7aa; color: #7c2d12; padding: .75rem; border-radius: 6px; }
+    h2 { margin-top: 2rem; }
+    footer { margin-top: 2rem; font-size: .9rem; color: #555; }
+    a { color: #0b69a3; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ICU24 Calibrated Baselines</h1>
+    <p>CPU-first, code-only clinical ML baselines for 0–24h ICU outcomes with transparent calibration and subgroup fairness slices.</p>
+    <div class="note">
+      This site is built from the repository's <code>docs/</code> folder via GitHub Pages. No real patient data is included; figures below are generated from synthetic data.
+    </div>
+  </header>
+
+  <h2>Reproduce locally</h2>
+  <ol>
+    <li>Create a Python 3.11 environment and install deps:</li>
+  </ol>
+  <pre><code># macOS example
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-pages.txt  # minimal deps for the synthetic run</code></pre>
+  <ol start="2">
+    <li>Run the synthetic pipeline:</li>
+  </ol>
+  <pre><code>python scripts/generate_synthetic.py
+python scripts/run_baselines.py
+python scripts/calibrate_and_eval.py
+python scripts/make_figures.py</code></pre>
+
+  <h2>Figures (synthetic)</h2>
+  <div class="grid">
+    <figure>
+      <img src="figures/age_lr_auroc_auprc.png" alt="Age LR AUROC/AUPRC" />
+      <figcaption>Age-only LR — AUROC/AUPRC</figcaption>
+    </figure>
+    <figure>
+      <img src="figures/age_lr_reliability.png" alt="Age LR Reliability" />
+      <figcaption>Age-only LR — Reliability (pre/post calibration)</figcaption>
+    </figure>
+    <figure>
+      <img src="figures/age_lr_subgroup_ece.png" alt="Age LR Subgroup ECE" />
+      <figcaption>Age-only LR — Subgroup ECE</figcaption>
+    </figure>
+    <figure>
+      <img src="figures/age_lr_decision_curve.png" alt="Age LR Decision Curve" />
+      <figcaption>Age-only LR — Decision curve</figcaption>
+    </figure>
+
+    <figure>
+      <img src="figures/ebm_auroc_auprc.png" alt="EBM AUROC/AUPRC" />
+      <figcaption>EBM — AUROC/AUPRC</figcaption>
+    </figure>
+    <figure>
+      <img src="figures/ebm_reliability.png" alt="EBM Reliability" />
+      <figcaption>EBM — Reliability (pre/post)</figcaption>
+    </figure>
+    <figure>
+      <img src="figures/ebm_subgroup_ece.png" alt="EBM Subgroup ECE" />
+      <figcaption>EBM — Subgroup ECE</figcaption>
+    </figure>
+    <figure>
+      <img src="figures/ebm_decision_curve.png" alt="EBM Decision Curve" />
+      <figcaption>EBM — Decision curve</figcaption>
+    </figure>
+
+    <figure>
+      <img src="figures/gbdt_auroc_auprc.png" alt="GBDT AUROC/AUPRC" />
+      <figcaption>GBDT — AUROC/AUPRC</figcaption>
+    </figure>
+    <figure>
+      <img src="figures/gbdt_reliability.png" alt="GBDT Reliability" />
+      <figcaption>GBDT — Reliability (pre/post)</figcaption>
+    </figure>
+    <figure>
+      <img src="figures/gbdt_subgroup_ece.png" alt="GBDT Subgroup ECE" />
+      <figcaption>GBDT — Subgroup ECE</figcaption>
+    </figure>
+    <figure>
+      <img src="figures/gbdt_decision_curve.png" alt="GBDT Decision Curve" />
+      <figcaption>GBDT — Decision curve</figcaption>
+    </figure>
+  </div>
+
+  <h2>Data & License</h2>
+  <p>All figures are generated from synthetic data. Code is licensed under MIT. No real patient data is included or distributed.</p>
+
+  <footer>
+    <p>Repository: <a href="https://github.com/shrutikadge/icu24-calibrated-baselines">shrutikadge/icu24-calibrated-baselines</a></p>
+  </footer>
+</body>
+</html>
