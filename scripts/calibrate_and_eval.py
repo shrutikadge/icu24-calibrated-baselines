@@ -3,6 +3,9 @@ Calibrate OOF predictions, select best calibration, compute ECE (with CI), subgr
 and write per-plot CSVs for figures.
 """
 import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import json
 import numpy as np
 import pandas as pd
